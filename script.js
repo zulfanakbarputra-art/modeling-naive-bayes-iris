@@ -58,47 +58,6 @@ const prediksiGaussian = (fitur) => {
     return terpilih
 }
 
-// 2. Prediksi Multinomial NB
-const prediksiMultinomial = (fitur) => {
-    let maxLogProb = -Infinity
-    let terpilih = classes[0]
-
-    for (let i = 0; i < classes.length; i++) {
-        let logProb = multinomialData.class_log_prior[i]
-        for (let j = 0; j < fitur.length; j++) {
-            logProb += fitur[j] * multinomialData.feature_log_prob[i][j]
-        }
-        if (logProb > maxLogProb) {
-            maxLogProb = logProb
-            terpilih = classes[i]
-        }
-    }
-    return terpilih
-}
-
-// 3. Prediksi Bernoulli NB
-const prediksiBernoulli = (fitur) => {
-    let maxLogProb = -Infinity
-    let terpilih = classes[0]
-    const binarize = bernoulliData.binarize
-
-    for (let i = 0; i < classes.length; i++) {
-        let logProb = bernoulliData.class_log_prior[i]
-        for (let j = 0; j < fitur.length; j++) {
-            const xBin = fitur[j] > binarize ? 1 : 0
-            const pLog = bernoulliData.feature_log_prob[i][j]
-            const pComplementLog = Math.log(1 - Math.exp(pLog) + 1e-9)
-            
-            logProb += xBin * pLog + (1 - xBin) * pComplementLog
-        }
-        if (logProb > maxLogProb) {
-            maxLogProb = logProb
-            terpilih = classes[i]
-        }
-    }
-    return terpilih
-}
-
 const singkatNama = (spesies) => spesies.replace("Iris-", "")
 
 formPrediksi.addEventListener("submit", (e) => {
@@ -115,12 +74,7 @@ formPrediksi.addEventListener("submit", (e) => {
     }
 
     const hasilG = prediksiGaussian(fitur)
-    const hasilM = prediksiMultinomial(fitur)
-    const hasilB = prediksiBernoulli(fitur)
 
     teksSpesies.textContent = "Hasil Prediksi Model:"
-    teksKeterangan.textContent = 
-        `• GaussianNB: ${singkatNama(hasilG)}\n` +
-        `• MultinomialNB: ${singkatNama(hasilM)}\n` +
-        `• BernoulliNB: ${singkatNama(hasilB)}`
+    teksKeterangan.textContent = `GaussianNB: ${singkatName(hasilG)}`; 
 })
