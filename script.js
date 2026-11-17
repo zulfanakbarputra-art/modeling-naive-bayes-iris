@@ -17,8 +17,6 @@ async function muatModel() {
         jumlah_train = dataModel.jumlah_train
         jumlah_test = dataModel.jumlah_test
         gaussianData = dataModel.gaussian
-        multinomialData = dataModel.multinomial
-        bernoulliData = dataModel.bernoulli
 
         tampilkanInfoModel()
     } catch (error) {
@@ -76,5 +74,5 @@ formPrediksi.addEventListener("submit", (e) => {
     const hasilG = prediksiGaussian(fitur)
 
     teksSpesies.textContent = "Hasil Prediksi Model:"
-    teksKeterangan.textContent = `GaussianNB: ${singkatName(hasilG)}`; 
+    teksKeterangan.textContent = `GaussianNB: ${singkatNama(hasilG)}`; 
 })
