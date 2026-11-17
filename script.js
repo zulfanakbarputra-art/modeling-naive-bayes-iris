@@ -34,7 +34,7 @@ const tampilkanInfoModel = () => {
     const jumlahData = jumlah_train + jumlah_test
     const persenTest = Math.round((jumlah_test / jumlahData) * 100)
     const persenTrain = 100 - persenTest
-    infoModel.textContent = `Train : Test = ${persenTrain}% : ${persenTest}% (Gaussian, Multinomial, Bernoulli)`
+    infoModel.textContent = `Train : Test = ${persenTrain}% : ${persenTest}% (Gaussian)`
 }
 
 // 1. Prediksi Gaussian NB
